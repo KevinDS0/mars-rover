@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Position {
+public final class Position {
 
     private final int latitude;
     private final int longitude;

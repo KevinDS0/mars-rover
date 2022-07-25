@@ -2,7 +2,7 @@ import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
 
-public class Rover {
+public final class Rover {
 
     private final Position position;
     private final Direction facingDirection;
