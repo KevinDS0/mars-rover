@@ -3,31 +3,13 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class RoverShould {
-
     @Test
-    void fail_to_initialize_from_null_position() {
+    void initialize_with_default_position_and_direction() {
 
-        assertThatNullPointerException()
-                .isThrownBy(() -> Rover.from(null, Direction.SOUTH));
-    }
+        var rover = Rover.from();
 
-    @Test
-    void fail_to_initialize_from_null_facing_direction() {
-
-        assertThatNullPointerException()
-                .isThrownBy(() -> Rover.from(aValidPosition(), null));
-    }
-
-    @Test
-    void initialize_from_defined_position_and_direction() {
-
-        var rover = Rover.from(Position.from(0,0), Direction.SOUTH);
-
-        assertThat(rover).isEqualTo(aValidRoverWithPosition());
-    }
-
-    private static Rover aValidRoverWithPosition() {
-        return Rover.from(aValidPosition(), Direction.SOUTH);
+        assertThat(rover.getPosition()).isEqualTo(aValidPosition());
+        assertThat(rover.getFacingDirection()).isEqualTo(Direction.NORTH);
     }
 
     private static Position aValidPosition() {

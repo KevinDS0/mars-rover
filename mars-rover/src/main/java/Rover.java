@@ -1,31 +1,24 @@
-import java.util.Objects;
-
-import static java.util.Objects.requireNonNull;
-
 public final class Rover {
 
+    private static final Position STARTING_POSITION = Position.from(0, 0);
+    private static final Direction STARTING_DIRECTION = Direction.NORTH;
     private final Position position;
     private final Direction facingDirection;
 
-    private Rover(Position position, Direction facingDirection) {
-        this.position = requireNonNull(position);
-        this.facingDirection = requireNonNull(facingDirection);
+    private Rover() {
+        this.position = STARTING_POSITION;
+        this.facingDirection = STARTING_DIRECTION;
     }
 
-    public static Rover from(Position position, Direction facingDirection) {
-        return new Rover(position, facingDirection);
+    public static Rover from() {
+        return new Rover();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Rover rover = (Rover) o;
-        return Objects.equals(position, rover.position) && facingDirection == rover.facingDirection;
+    public Position getPosition() {
+        return position;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(position, facingDirection);
+    public Direction getFacingDirection() {
+        return facingDirection;
     }
 }
