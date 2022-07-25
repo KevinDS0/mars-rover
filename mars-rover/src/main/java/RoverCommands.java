@@ -1,4 +1,4 @@
 public interface RoverCommands {
 
-    void send();
+    void send(Command command);
 }
