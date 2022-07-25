@@ -2,12 +2,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class RoverShould {
+class RoverShould {
 
     @Test
     void fail_to_initialize_from_null_position() {
 
-        assertThatIllegalArgumentException()
+        assertThatNullPointerException()
                 .isThrownBy(() -> Rover.from(null));
     }
 
@@ -15,14 +15,14 @@ public class RoverShould {
 
         var rover = Rover.from(Position.from(0,0));
 
-        assertThat(rover).isEqualTo(aValidRoverWithPosition(0,0));
+        assertThat(rover).isEqualTo(aValidRoverWithPosition());
     }
 
-    private static Rover aValidRoverWithPosition(int latitude, int longitude) {
-        return Rover.from(aValidPosition(latitude, longitude));
+    private static Rover aValidRoverWithPosition() {
+        return Rover.from(aValidPosition());
     }
 
-    private static Position aValidPosition(int latitude, int longitude) {
-        return Position.from(latitude, longitude);
+    private static Position aValidPosition() {
+        return Position.from(0, 0);
     }
 }
