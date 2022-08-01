@@ -9,9 +9,10 @@ class RoverShould {
     private Rover rover;
 
     @BeforeEach
-    void before(){
+    void before() {
         this.rover = Rover.from();
     }
+
     @Test
     void initialize_with_default_position_and_direction() {
         assertThat(rover.getCoordinates()).isEqualTo(STARTING_COORDINATES);
@@ -35,6 +36,16 @@ class RoverShould {
 
         assertThat(rover.getCoordinates()).isEqualTo(STARTING_COORDINATES);
         assertThat(rover.getFacingDirection()).isEqualTo(Direction.WEST);
+    }
+
+    @Test
+    void turn_east_when_receiving_turn_right_command_and_facing_north() {
+        var command = Command.from(CommandType.TURN_RIGHT);
+
+        rover.receive(command);
+
+        assertThat(rover.getCoordinates()).isEqualTo(STARTING_COORDINATES);
+        assertThat(rover.getFacingDirection()).isEqualTo(Direction.EAST);
     }
 
     private static Coordinates aValidCoordinates(Integer latitude, Integer longitude) {

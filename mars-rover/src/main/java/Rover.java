@@ -28,7 +28,7 @@ public final class Rover {
         if (command.getType() == CommandType.MOVE) {
             move();
         }
-        if (command.getType() == CommandType.TURN_LEFT) {
+        if (command.getType() == CommandType.TURN_LEFT || command.getType() == CommandType.TURN_RIGHT) {
             turn(command.getType());
         }
     }
