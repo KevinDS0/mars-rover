@@ -1,6 +1,6 @@
 import static java.lang.String.format;
 
-public final class Rover {
+public class Rover {
 
     private static final Coordinates STARTING_COORDINATES = Coordinates.from(0, 0);
     private static final Direction STARTING_DIRECTION = Direction.NORTH;
@@ -24,12 +24,11 @@ public final class Rover {
         return facingDirection;
     }
 
-    void receive(Command command){
-        if (command.getType() == CommandType.MOVE) {
+    public void receive(CommandType commandType) {
+        if (commandType == CommandType.MOVE) {
             move();
-        }
-        if (command.getType() == CommandType.TURN_LEFT || command.getType() == CommandType.TURN_RIGHT) {
-            turn(command.getType());
+        } else {
+            turn(commandType);
         }
     }
 

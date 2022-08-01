@@ -21,18 +21,15 @@ class RoverShould {
 
     @Test
     void move_to_0_1_when_receiving_move_command_and_facing_starting_direction() {
-        var command = Command.from(CommandType.MOVE);
 
-        rover.receive(command);
+        rover.receive(CommandType.MOVE);
 
         assertThat(rover.getCoordinates()).isEqualTo(aValidCoordinates(0, 1));
     }
 
     @Test
     void turn_west_when_receiving_turn_left_command_and_facing_north() {
-        var command = Command.from(CommandType.TURN_LEFT);
-
-        rover.receive(command);
+        rover.receive(CommandType.TURN_LEFT);
 
         assertThat(rover.getCoordinates()).isEqualTo(STARTING_COORDINATES);
         assertThat(rover.getFacingDirection()).isEqualTo(Direction.WEST);
@@ -40,9 +37,7 @@ class RoverShould {
 
     @Test
     void turn_east_when_receiving_turn_right_command_and_facing_north() {
-        var command = Command.from(CommandType.TURN_RIGHT);
-
-        rover.receive(command);
+        rover.receive(CommandType.TURN_RIGHT);
 
         assertThat(rover.getCoordinates()).isEqualTo(STARTING_COORDINATES);
         assertThat(rover.getFacingDirection()).isEqualTo(Direction.EAST);
