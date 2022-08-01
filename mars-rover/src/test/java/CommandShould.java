@@ -11,10 +11,10 @@ class CommandShould {
     }
 
     @Test
-    void initialize_from_valid_value() {
-        var value = "M";
-        var command = Command.from(value);
+    void initialize_from_valid_type() {
+        var type = CommandType.MOVE;
+        var command = Command.from(type);
 
-        assertThat(command.getValue()).isEqualTo(value);
+        assertThat(command.getType()).isEqualTo(type);
     }
 }

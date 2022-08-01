@@ -1,3 +1,5 @@
+import static java.lang.String.format;
+
 public final class Rover {
 
     private static final Coordinates STARTING_COORDINATES = Coordinates.from(0, 0);
@@ -23,9 +25,17 @@ public final class Rover {
     }
 
     void receive(Command command){
-        if (command.getValue().equals("M")) {
+        if (command.getType() == CommandType.MOVE) {
             move();
         }
+        if (command.getType() == CommandType.TURN_LEFT) {
+            turn(command.getType());
+        }
+    }
+
+    private void turn(CommandType type) {
+        facingDirection = facingDirection.nextAt(type)
+                .orElseThrow(() -> new IllegalStateException(format("Cannot find valid direction for rover when receiving command type : %s", type)));
     }
 
     private void move() {
