@@ -20,11 +20,39 @@ class RoverShould {
     }
 
     @Test
-    void move_to_0_1_when_receiving_move_command_and_facing_starting_direction() {
+    void move_to_0_1_when_receiving_move_command_and_facing_north() {
 
         rover.receive(CommandType.MOVE);
 
         assertThat(rover.getCoordinates()).isEqualTo(aValidCoordinates(0, 1));
+    }
+
+    @Test
+    void move_to_1_0_when_receiving_move_command_and_facing_east() {
+        rover.receive(CommandType.TURN_RIGHT);
+
+        rover.receive(CommandType.MOVE);
+
+        assertThat(rover.getCoordinates()).isEqualTo(aValidCoordinates(1, 0));
+    }
+
+    @Test
+    void move_to_minus_1_0_when_receiving_move_command_and_facing_west() {
+        rover.receive(CommandType.TURN_LEFT);
+
+        rover.receive(CommandType.MOVE);
+
+        assertThat(rover.getCoordinates()).isEqualTo(aValidCoordinates(-1, 0));
+    }
+
+    @Test
+    void move_to_0_minus_1_when_receiving_move_command_and_facing_south() {
+        rover.receive(CommandType.TURN_RIGHT);
+        rover.receive(CommandType.TURN_RIGHT);
+
+        rover.receive(CommandType.MOVE);
+
+        assertThat(rover.getCoordinates()).isEqualTo(aValidCoordinates(0, -1));
     }
 
     @Test
