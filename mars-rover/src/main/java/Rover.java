@@ -1,12 +1,12 @@
 public final class Rover {
 
-    private static final Position STARTING_POSITION = Position.from(0, 0);
+    private static final Coordinates STARTING_COORDINATES = Coordinates.from(0, 0);
     private static final Direction STARTING_DIRECTION = Direction.NORTH;
-    private final Position position;
-    private final Direction facingDirection;
+    private Coordinates coordinates;
+    private Direction facingDirection;
 
     private Rover() {
-        this.position = STARTING_POSITION;
+        this.coordinates = STARTING_COORDINATES;
         this.facingDirection = STARTING_DIRECTION;
     }
 
@@ -14,11 +14,22 @@ public final class Rover {
         return new Rover();
     }
 
-    public Position getPosition() {
-        return position;
+    public Coordinates getCoordinates() {
+        return coordinates;
     }
 
     public Direction getFacingDirection() {
         return facingDirection;
+    }
+
+    void receive(Command command){
+        if (command.getValue().equals("M")) {
+            move();
+        }
+    }
+
+    private void move() {
+        coordinates = Coordinates.from(coordinates.getLatitude() + facingDirection.getLatitude(),
+                coordinates.getLongitude() + facingDirection.getLongitude());
     }
 }

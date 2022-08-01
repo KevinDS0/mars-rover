@@ -4,4 +4,4 @@ mars-rover/target/mars-rover-1.0-SNAPSHOT.jar
 mars-rover/target/maven-archiver/pom.properties
 mars-rover/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 *.lst
-mars-rover/target/
+*.class
