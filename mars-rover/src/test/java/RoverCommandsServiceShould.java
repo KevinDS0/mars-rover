@@ -1,46 +1,45 @@
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
-import org.mockito.Mockito;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.BDDMockito.then;
-import static org.mockito.Mockito.*;
+import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class RoverCommandsServiceShould {
 
-    private final Rover rover = mock(Rover.class);
-    private final RoverCommands roverCommands = new RoverCommandsService(rover);
+    private static final Set<Obstacle> OBSTACLES = Set.of(Obstacle.from(Position.from(1,1)), Obstacle.from(Position.from(-2,0)));
+    private final Rover rover = Rover.from();
+    private final Grid grid = Grid.aGrid(OBSTACLES);
+    private final RoverCommands roverCommands = new RoverCommandsService(rover, grid);
 
     @Test
-    void send_move_turn_left_command() {
-        char[] command = {'M', 'L'};
-        var inOrder = inOrder(rover);
+    void send_move_forward_turn_left_command() {
+        char[] command = {'F', 'L'};
 
         roverCommands.send(command);
 
-        then(rover).should(times(1)).receive(CommandType.MOVE);
-        then(rover).should(times(1)).receive(CommandType.TURN_LEFT);
-        then(rover).should(never()).receive(CommandType.TURN_RIGHT);
-        inOrder.verify(rover).receive(CommandType.MOVE);
-        inOrder.verify(rover).receive(CommandType.TURN_LEFT);
+        assertThat(rover.getPosition().getX()).isEqualTo(0);
+        assertThat(rover.getPosition().getY()).isEqualTo(1);
+        assertThat(rover.getFacingDirection()).isEqualTo(Direction.WEST);
     }
 
     @Test
     void send_complex_command() {
-        char[] command = {'M', 'L', 'L', 'M', 'R', 'M'};
-        var inOrder = inOrder(rover);
+        char[] command = {'F', 'L', 'L', 'F', 'R', 'F'};
 
         roverCommands.send(command);
 
-        then(rover).should(times(3)).receive(CommandType.MOVE);
-        then(rover).should(times(2)).receive(CommandType.TURN_LEFT);
-        then(rover).should(times(1)).receive(CommandType.TURN_RIGHT);
-        inOrder.verify(rover).receive(CommandType.MOVE);
-        inOrder.verify(rover, times(2)).receive(CommandType.TURN_LEFT);
-        inOrder.verify(rover).receive(CommandType.MOVE);
-        inOrder.verify(rover).receive(CommandType.TURN_RIGHT);
-        inOrder.verify(rover).receive(CommandType.MOVE);
+        assertThat(rover.getPosition().getX()).isEqualTo(-1);
+        assertThat(rover.getPosition().getY()).isEqualTo(0);
+        assertThat(rover.getFacingDirection()).isEqualTo(Direction.WEST);
+    }
+
+
+    @Test
+    void send_command_that_move_rover_to_x_grid_edge() {
+        char[] command = {'R', 'F', 'F', 'F', 'F', 'F', 'F'};
+
+        roverCommands.send(command);
+        assertThat(rover.getPosition().getX()).isEqualTo(-4);
+        assertThat(rover.getPosition().getY()).isEqualTo(0);
     }
 }

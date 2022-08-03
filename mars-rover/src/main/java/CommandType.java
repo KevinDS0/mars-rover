@@ -1,10 +1,9 @@
 import java.util.Arrays;
-import java.util.Optional;
 
 import static java.lang.String.format;
 
 public enum CommandType {
-    MOVE("M"), TURN_LEFT("L"), TURN_RIGHT("R");
+    MOVE_FORWARD("F"),MOVE_BACKWARDS("B"), TURN_LEFT("L"), TURN_RIGHT("R");
 
     private final String value;
 
