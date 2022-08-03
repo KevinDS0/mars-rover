@@ -12,10 +12,6 @@ public enum CommandType {
         this.value = value;
     }
 
-    public String getValue() {
-        return value;
-    }
-
     public static CommandType from(String value) {
         return Arrays.stream(CommandType.values())
                 .filter(commandType -> commandType.value.equals(value))

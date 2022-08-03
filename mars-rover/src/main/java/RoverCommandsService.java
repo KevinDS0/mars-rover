@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class RoverCommandsService implements RoverCommands {
     private final Rover rover;
@@ -8,9 +9,11 @@ public class RoverCommandsService implements RoverCommands {
     }
 
     @Override
-    public void send(String command) {
-        Arrays.stream(command.split(""))
+    public void send(char[] commandArray) {
+        Arrays.stream(String.valueOf(commandArray).split(""))
                 .map(CommandType::from)
                 .forEachOrdered(rover::receive);
+
     }
+
 }

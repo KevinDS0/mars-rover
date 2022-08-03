@@ -2,13 +2,13 @@ import static java.lang.String.format;
 
 public class Rover {
 
-    private static final Coordinates STARTING_COORDINATES = Coordinates.from(0, 0);
+    private static final Position STARTING_POSITION = Position.from(0, 0);
     private static final Direction STARTING_DIRECTION = Direction.NORTH;
-    private Coordinates coordinates;
+    private Position position;
     private Direction facingDirection;
 
     private Rover() {
-        this.coordinates = STARTING_COORDINATES;
+        this.position = STARTING_POSITION;
         this.facingDirection = STARTING_DIRECTION;
     }
 
@@ -16,8 +16,8 @@ public class Rover {
         return new Rover();
     }
 
-    public Coordinates getCoordinates() {
-        return coordinates;
+    public Position getCoordinates() {
+        return position;
     }
 
     public Direction getFacingDirection() {
@@ -38,7 +38,8 @@ public class Rover {
     }
 
     private void move() {
-        coordinates = Coordinates.from(coordinates.getLatitude() + facingDirection.getLatitude(),
-                coordinates.getLongitude() + facingDirection.getLongitude());
+        var newX = position.getX() + facingDirection.getX();
+        var newY = position.getY() + facingDirection.getY();
+        position = Position.from(newX, newY);
     }
 }

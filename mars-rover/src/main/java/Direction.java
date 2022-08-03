@@ -6,20 +6,20 @@ public enum Direction {
     SOUTH(0, -1),
     EAST(1, 0);
 
-    private final Integer latitude;
-    private final Integer longitude;
+    private final Integer x;
+    private final Integer y;
 
-    Direction(Integer latitude, Integer longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+    Direction(Integer x, Integer y) {
+        this.x = x;
+        this.y = y;
     }
 
-    public Integer getLatitude() {
-        return latitude;
+    public Integer getX() {
+        return x;
     }
 
-    public Integer getLongitude() {
-        return longitude;
+    public Integer getY() {
+        return y;
     }
 
     public Optional<Direction> nextAt(CommandType commandType) {

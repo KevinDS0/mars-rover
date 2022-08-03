@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class RoverShould {
 
-    private static final Coordinates STARTING_COORDINATES = aValidCoordinates(0, 0);
+    private static final Position STARTING_POSITION = aValidPosition(0, 0);
     private Rover rover;
 
     @BeforeEach
@@ -15,7 +15,7 @@ class RoverShould {
 
     @Test
     void initialize_with_default_position_and_direction() {
-        assertThat(rover.getCoordinates()).isEqualTo(STARTING_COORDINATES);
+        assertThat(rover.getCoordinates()).isEqualTo(STARTING_POSITION);
         assertThat(rover.getFacingDirection()).isEqualTo(Direction.NORTH);
     }
 
@@ -24,7 +24,7 @@ class RoverShould {
 
         rover.receive(CommandType.MOVE);
 
-        assertThat(rover.getCoordinates()).isEqualTo(aValidCoordinates(0, 1));
+        assertThat(rover.getCoordinates()).isEqualTo(aValidPosition(0, 1));
     }
 
     @Test
@@ -33,7 +33,7 @@ class RoverShould {
 
         rover.receive(CommandType.MOVE);
 
-        assertThat(rover.getCoordinates()).isEqualTo(aValidCoordinates(1, 0));
+        assertThat(rover.getCoordinates()).isEqualTo(aValidPosition(1, 0));
     }
 
     @Test
@@ -42,7 +42,7 @@ class RoverShould {
 
         rover.receive(CommandType.MOVE);
 
-        assertThat(rover.getCoordinates()).isEqualTo(aValidCoordinates(-1, 0));
+        assertThat(rover.getCoordinates()).isEqualTo(aValidPosition(-1, 0));
     }
 
     @Test
@@ -52,14 +52,14 @@ class RoverShould {
 
         rover.receive(CommandType.MOVE);
 
-        assertThat(rover.getCoordinates()).isEqualTo(aValidCoordinates(0, -1));
+        assertThat(rover.getCoordinates()).isEqualTo(aValidPosition(0, -1));
     }
 
     @Test
     void turn_west_when_receiving_turn_left_command_and_facing_north() {
         rover.receive(CommandType.TURN_LEFT);
 
-        assertThat(rover.getCoordinates()).isEqualTo(STARTING_COORDINATES);
+        assertThat(rover.getCoordinates()).isEqualTo(STARTING_POSITION);
         assertThat(rover.getFacingDirection()).isEqualTo(Direction.WEST);
     }
 
@@ -67,11 +67,11 @@ class RoverShould {
     void turn_east_when_receiving_turn_right_command_and_facing_north() {
         rover.receive(CommandType.TURN_RIGHT);
 
-        assertThat(rover.getCoordinates()).isEqualTo(STARTING_COORDINATES);
+        assertThat(rover.getCoordinates()).isEqualTo(STARTING_POSITION);
         assertThat(rover.getFacingDirection()).isEqualTo(Direction.EAST);
     }
 
-    private static Coordinates aValidCoordinates(Integer latitude, Integer longitude) {
-        return Coordinates.from(latitude, longitude);
+    private static Position aValidPosition(Integer x, Integer y) {
+        return Position.from(x, y);
     }
 }

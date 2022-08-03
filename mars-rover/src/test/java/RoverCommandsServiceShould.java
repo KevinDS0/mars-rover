@@ -15,7 +15,7 @@ class RoverCommandsServiceShould {
 
     @Test
     void send_move_turn_left_command() {
-        var command = "ML";
+        char[] command = {'M', 'L'};
         var inOrder = inOrder(rover);
 
         roverCommands.send(command);
@@ -29,7 +29,7 @@ class RoverCommandsServiceShould {
 
     @Test
     void send_complex_command() {
-        var command = "MLLMRM";
+        char[] command = {'M', 'L', 'L', 'M', 'R', 'M'};
         var inOrder = inOrder(rover);
 
         roverCommands.send(command);
