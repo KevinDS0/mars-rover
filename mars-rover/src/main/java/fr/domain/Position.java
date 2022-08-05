@@ -1,5 +1,8 @@
+package fr.domain;
+
 import java.util.Objects;
 
+import static java.lang.String.format;
 import static java.util.Objects.requireNonNull;
 
 public final class Position {
@@ -8,6 +11,9 @@ public final class Position {
     private final Integer y;
 
     private Position(Integer x, Integer y) {
+        if (x < 1 || y < 1) {
+            throw new IllegalArgumentException(format("Invalid position {x=%s, y=%s} must be > {1, 1}", x, y));
+        }
         this.x = requireNonNull(x);
         this.y = requireNonNull(y);
     }

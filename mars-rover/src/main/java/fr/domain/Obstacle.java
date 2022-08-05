@@ -1,5 +1,6 @@
+package fr.domain;
 
-public class Obstacle {
+public final class Obstacle {
 
     private final Position position;
 
